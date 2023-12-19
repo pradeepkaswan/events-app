@@ -1,4 +1,19 @@
-import { Schema, model, models } from 'mongoose'
+import { Document, Schema, model, models } from 'mongoose'
+
+export interface EventInterface extends Document {
+  _id: string
+  title: string
+  description?: string
+  venue?: string
+  imageUrl: string
+  startDate: Date
+  endDate: Date
+  price?: string
+  isFree: boolean
+  url?: string
+  category: { _id: string; name: string }
+  organizer: { _id: string; firstName: string; lastName: string }
+}
 
 const EventSchema = new Schema(
   {

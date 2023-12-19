@@ -3,7 +3,6 @@
 import User from '../../models/user.model'
 import Event from '../../models/event.model'
 import Order from '../../models/order.model'
-import { CreateUserParams } from '@/types'
 import { handleError } from '../utils'
 import { connectToDatabase } from '../db'
 import { CreateUserParams, UpdateUserParams } from '@/types'
@@ -21,7 +20,20 @@ export const createUser = async (user: CreateUserParams) => {
   }
 }
 
-export const updateUser = async (user: CreateUserParams) => {
+export async function getUserById(userId: string) {
+  try {
+    await connectToDatabase()
+
+    const user = await User.findById(userId)
+
+    if (!user) throw new Error('User not found')
+    return JSON.parse(JSON.stringify(user))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+export const updateUser = async (clerkId: string, user: UpdateUserParams) => {
   try {
     await connectToDatabase()
 
@@ -39,11 +51,11 @@ export const updateUser = async (user: CreateUserParams) => {
   }
 }
 
-export const deleteUser = async (user: CreateUserParams) => {
+export const deleteUser = async (clerkId: string) => {
   try {
     await connectToDatabase()
 
-    const userToDelete = await User.findOneAndDelete({ clerkId })
+    const userToDelete = await User.findOne({ clerkId })
 
     if (!userToDelete) {
       throw new Error('User not found')
