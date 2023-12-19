@@ -1,7 +1,7 @@
 /**
  * Event interface
  */
-declare interface EventInterface {
+export interface EventInterface {
   _id: string
   title: string
   description?: string
