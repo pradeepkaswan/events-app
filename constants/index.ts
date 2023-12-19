@@ -12,4 +12,7 @@ export const eventDefaultValues = {
   categoryId: '',
   startDate: new Date(),
   endDate: new Date(),
+  price: '',
+  isFree: false,
+  url: '',
 }
