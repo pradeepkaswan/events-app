@@ -6,7 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Events App',
+  title: 'Events Management App',
   description: 'A platform for event management',
 }
 

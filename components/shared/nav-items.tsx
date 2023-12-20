@@ -16,7 +16,7 @@ const NavItems = () => {
           <li
             key={link.route}
             className={`${
-              isActive ? 'text-primary-500' : ''
+              isActive ? 'text-primary-500' : 'underline underline-offset-2'
             } flex-center whitespace-nowrap`}
           >
             <Link href={link.route}>{link.title}</Link>

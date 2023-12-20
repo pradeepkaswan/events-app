@@ -38,9 +38,9 @@ export function FileUploader({
       <input {...getInputProps()} className="cursor-pointer" />
 
       <div>
-        <UploadDropzone className="ut-label:text-lg ut-allowed-content:ut-uploading:text-red-300">
-          <UploadButton className="mt-4 ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50" />
-        </UploadDropzone>
+        {/* <UploadDropzone className="ut-label:text-lg ut-allowed-content:ut-uploading:text-red-300"> */}
+        {/* <UploadButton className="mt-4 ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50" /> */}
+        {/* </UploadDropzone> */}
       </div>
     </div>
   )
