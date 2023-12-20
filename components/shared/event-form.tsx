@@ -7,16 +7,20 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 
+import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { eventFormSchema } from '@/lib/validation'
 import { eventDefaultValues } from '@/constants'
 import Dropdown from './dropdown'
+import { Textarea } from '../ui/textarea'
+import { FileUploader } from './file-uploader'
 
 type EventFormProps = {
   userId: string
@@ -24,6 +28,7 @@ type EventFormProps = {
 }
 
 const EventForm = ({ userId, type }: EventFormProps) => {
+  const [files, setFiles] = useState<File[]>([])
   const initialValues = eventDefaultValues
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
@@ -47,10 +52,11 @@ const EventForm = ({ userId, type }: EventFormProps) => {
             name="title"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Title</FormLabel>
+                <FormLabel>Event Title</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormDescription>Be clear and descriptive</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -71,7 +77,39 @@ const EventForm = ({ userId, type }: EventFormProps) => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+        </div>
+
+        <div className="flex flex-col gap-5 md:flex-row">
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Description</FormLabel>
+                <FormControl className="h-72">
+                  <Textarea {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Image</FormLabel>
+                <FormControl>
+                  <FileUploader
+                    onFieldChange={field.onChange}
+                    imageUrl={field.value}
+                    setFiles={setFiles}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
       </form>
     </Form>
